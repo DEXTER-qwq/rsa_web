@@ -10,7 +10,7 @@ const test = {
     },
 
     getVerity(params){
-        return request.get('/verify',{params})
+        return request.get('/double',{params})
     }
 }
 
