@@ -1,49 +1,94 @@
 <template>
   <div class="container">
-    <h1 >pk: n,e,Hash  sk: d</h1>
+    <h1 >pk: n {{get10(n)}},e {{e}},Hash sha512 sk: d {{get10(d)}}</h1>
     <div class="inputDiv">
       <div>m</div>
-      <el-input v-model="input" placeholder="请输入内容"></el-input>
+      <el-input v-model="msg" placeholder="请输入内容"></el-input>
       <el-button type="primary" style="margin-left: 10px" @click="handleClick">提交</el-button>
     </div>
-    <h1>盲化后数据 M=<span style=""> {{ getM }}</span>, 随机取的R=</h1>
-    <h1>银行盲签名后 σ'=</h1>
-    <h1>除盲后 σ=</h1>
+    <h1>盲化后数据 M=<span style=""> {{ get10(M) }}</span>, 随机取的R={{get10(R)}}</h1>
+    <h1>银行盲签名后 σ'={{get10(sigma1)}}</h1>
+    <h1>除盲后 σ={{get10(sigma)}}</h1>
     <div class="inputDiv">
       <div>σ</div>
-      <el-input v-model="input" placeholder="请输入内容"></el-input>
+      <el-input v-model="sigmaInput"  placeholder="请输入内容"></el-input>
       <div>m</div>
-      <el-input v-model="input" placeholder="请输入内容"></el-input>
-      <el-button type="primary" style="margin-left: 10px">检验</el-button>
+      <el-input v-model="msgInput" placeholder="请输入内容"></el-input>
+      <el-button type="primary" style="margin-left: 10px" @click="verity">检验</el-button>
     </div>
-    <h1>双花/签名有效/无效</h1>
+    <h1>state :{{state}}</h1>
   </div>
 </template>
 
 <script>
-import testApi from "@/api/testApi";
+import rsaApi from "@/api/rsaApi";
 
 
 export default {
   data(){
     return{
-      input:'',
-      M:""
+      n:'',
+      e:'',
+      d:'',
+      R:'',
+      msg:'',
+      M:'',
+      sigma1:'',
+      sigma:'',
+      sigmaInput:'',
+      msgInput:'',
+      state:''
     }
   },
   computed: {
-    getM() {
-      return this.M.slice(0,10)
-    }
+
   },
   methods:{
+    get10(str) {
+      if (str.slice(0,10))
+        return str.slice(0,10)+"..."
+      else
+        return str.slice(0,10)
+    },
+    getInit(){
+      rsaApi.getData().then(
+          res=>{
+            console.log(res)
+            this.n=res.data[0]
+            this.e=res.data[1]
+            this.d=res.data[2]
+            this.R=res.data[3]
+          }
+      )
+    },
     handleClick(){
-      testApi.getData().then(res => {
+      rsaApi.getBlindData({
+        msg:this.msg
+      }).then(res => {
         console.log(res)
-        this.M=res.data
+        // console.log(this.n)
+        this.M=res.data[0]
+        this.sigma1=res.data[1]
+        this.sigma=res.data[2]
+        this.sigmaInput=this.sigma
+        this.msgInput=this.msg
       })
-
+    },
+    verity(){
+      rsaApi.getVerity(
+          {
+            sigma: this.sigmaInput,
+            msg: this.msgInput
+          }
+      ).then(res => {
+        console.log(res)
+        this.state = res.data
+      })
     }
+  },
+  mounted() {
+    this.getInit()
+    // this.Sign()
   }
 }
 </script>
