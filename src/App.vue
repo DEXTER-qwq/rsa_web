@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <My_index></My_index>
-  </div>
+  <My_index></My_index>
 </template>
 
 <script>
