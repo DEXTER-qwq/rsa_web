@@ -11,6 +11,10 @@ const test = {
 
     getVerity(params){
         return request.get('/double',{params})
+    },
+
+    payData(params){
+        return request.get('/pay',{params})
     }
 }
 
