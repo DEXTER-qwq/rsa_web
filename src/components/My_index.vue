@@ -17,34 +17,36 @@
 <!--    <h1>银行盲签名后 σ'={{get10(sigma1)}}</h1>-->
 <!--    <h1>除盲后 σ={{get10(sigma)}}</h1>-->
     <div class="inputDiv" style="margin-top: 30px">
-      <div>person</div>
-      <el-input v-model="input" placeholder="请输入收款方姓名"></el-input>
-      <el-button type="primary" style="margin-left: 10px" @click="verity">发送</el-button>
+<!--      <div>person</div>-->
+<!--      <el-input v-model="input" placeholder="请输入收款方姓名"></el-input>-->
+<!--      <el-button type="primary" style="margin-left: 10px" @click="verity">发送</el-button>-->
       <div>σ</div>
       <el-input v-model="sigmaInput"  placeholder="请输入内容"></el-input>
       <div>m</div>
       <el-input v-model="msgInput" placeholder="请输入内容"></el-input>
-      <el-button type="primary" style="margin-left: 10px" @click="verity">使用</el-button>
+      <el-button type="primary" style="margin-left: 10px" @click="verity">确认收款</el-button>
     </div>
     <h1>state :{{state}}</h1>
 
-    <div style="width: 60%">
+    <div>
+      <h1>用户信息</h1>
       <el-row :gutter="20">
         <el-col :span="16" :push="8">
           <el-table
               :data="tableData1">
             <el-table-column
-                prop="msg"
-                label="msg"
+                prop="name"
+                label="name"
                 width="300">
             </el-table-column>
             <el-table-column
-                prop="sigma"
-                label="sigma">
+                prop="money"
+                label="money">
             </el-table-column>
           </el-table>
         </el-col>
       </el-row>
+      <h1>接收到的付款请求</h1>
       <el-row :gutter="20" type="flex" justify="space-between">
         <el-col :span="8">
           <el-select
@@ -60,13 +62,13 @@
           <el-table
               :data="tableData2">
             <el-table-column
-                prop="msg"
-                label="msg"
+                prop="sigma"
+                label="sigma"
                 width="300">
             </el-table-column>
             <el-table-column
-                prop="sigma"
-                label="sigma">
+                prop="msg"
+                label="msg">
             </el-table-column>
           </el-table>
         </el-col>
@@ -99,21 +101,14 @@ export default {
       input:'',
       list:[1,2,3],
       user:'userA',
-      tableData1: [
-        {
-          sigma: '2016-05-02',
-          msg: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          sigma: '2016-05-02',
-          msg: '上海市普陀区金沙江路 1518 弄'
-        }],
+      tableData1: [],
       tableData2: [
         {
-          sigma: '2016-05-02',
-          msg: '上海市普陀区金沙江路 1518 弄'
+          msg: '2016-05-02',
+          sigma: '上海市普陀区金沙江路 1518 弄'
         }, {
-          sigma: '2016-05-02',
-          msg: '上海市普陀区金沙江路 1518 弄'
+          msg: '2016-05-02',
+          sigma: '上海市普陀区金沙江路 1518 弄'
         }],
     }
   },
@@ -170,10 +165,17 @@ export default {
         msg:this.msg,
         money:this.money
       })
+    },
+    getUser() {
+      rsaApi.getUser({}).then(res=>{
+        console.log(res)
+        this.tableData1=res.data
+      })
     }
   },
   mounted() {
     this.getInit()
+    this.getUser()
     // this.Sign()
   }
 }

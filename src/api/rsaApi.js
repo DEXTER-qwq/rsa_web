@@ -15,6 +15,10 @@ const test = {
 
     payData(params){
         return request.get('/pay',{params})
+    },
+
+    getUser(params){
+        return request.get('/getUser',{params})
     }
 }
 
