@@ -5,8 +5,6 @@
     <div class="inputDiv">
       <div>payer</div>
       <el-input v-model="payer" placeholder="请输入付款方姓名"></el-input>
-      <div>payee</div>
-      <el-input v-model="payee" placeholder="请输入收款方姓名"></el-input>
       <div>m</div>
       <el-input v-model="msg" placeholder="请输入内容"></el-input>
       <div>money</div>
@@ -20,6 +18,8 @@
 <!--      <div>person</div>-->
 <!--      <el-input v-model="input" placeholder="请输入收款方姓名"></el-input>-->
 <!--      <el-button type="primary" style="margin-left: 10px" @click="verity">发送</el-button>-->
+      <div>payee</div>
+      <el-input v-model="payee" placeholder="请输入收款方姓名"></el-input>
       <div>σ</div>
       <el-input v-model="sigmaInput"  placeholder="请输入内容"></el-input>
       <div>m</div>
@@ -47,18 +47,18 @@
         </el-col>
       </el-row>
       <h1>接收到的付款请求</h1>
-      <el-row :gutter="20" type="flex" justify="space-between">
-        <el-col :span="8">
-          <el-select
-              v-model="user"
-              placeholder="请选择用户"
-              @change="onChange"
-          >
-            <el-option label="用户A" value="userA"></el-option>
-            <el-option label="用户B" value="userB"></el-option>
-          </el-select>
-        </el-col>
-        <el-col :span="16">
+      <el-row :gutter="20" >
+<!--        <el-col :span="8">-->
+<!--          <el-select-->
+<!--              v-model="user"-->
+<!--              placeholder="请选择用户"-->
+<!--              @change="onChange"-->
+<!--          >-->
+<!--            <el-option label="用户A" value="userA"></el-option>-->
+<!--            <el-option label="用户B" value="userB"></el-option>-->
+<!--          </el-select>-->
+<!--        </el-col>-->
+        <el-col :span="16" :push="8">
           <el-table
               :data="tableData2">
             <el-table-column
