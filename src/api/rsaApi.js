@@ -19,6 +19,22 @@ const test = {
 
     getUser(params){
         return request.get('/getUser',{params})
+    },
+
+    getMessage(params){
+        return request.get('/getMessage',{params})
+    },
+
+    newCurrency(params){
+        return request.get('/newCurrency', {params})
+    },
+
+    showCurrency(params){
+        return request.get('/showCurrency',{params})
+    },
+
+    delCurrency(params){
+        return request.get('/delCurrency',{params})
     }
 }
 

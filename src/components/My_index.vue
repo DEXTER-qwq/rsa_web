@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 >面值 1 pk: n {{get10(n)}},e {{e}},Hash sha512 sk: d {{get10(d)}}</h1>
+<!--    <h1 >面值 1 pk: n {{get10(n)}},e {{e}},Hash sha512 sk: d {{get10(d)}}</h1>-->
     <!--    <h1 >面值 5 pk: n {{get10(n)}},e {{e}},Hash sha512 sk: d {{get10(d)}}</h1>-->
     <div class="inputDiv">
       <div>payer</div>
@@ -31,7 +31,7 @@
     <div>
       <h1>用户信息</h1>
       <el-row :gutter="20">
-        <el-col :span="16" :push="8">
+        <el-col :span="16" :push="4">
           <el-table
               :data="tableData1">
             <el-table-column
@@ -41,7 +41,8 @@
             </el-table-column>
             <el-table-column
                 prop="money"
-                label="money">
+                label="money"
+                width="300">
             </el-table-column>
           </el-table>
         </el-col>
@@ -58,7 +59,7 @@
 <!--            <el-option label="用户B" value="userB"></el-option>-->
 <!--          </el-select>-->
 <!--        </el-col>-->
-        <el-col :span="16" :push="8">
+        <el-col :span="16" :push="4">
           <el-table
               :data="tableData2">
             <el-table-column
@@ -68,7 +69,8 @@
             </el-table-column>
             <el-table-column
                 prop="msg"
-                label="msg">
+                label="msg"
+                width="300">
             </el-table-column>
           </el-table>
         </el-col>
@@ -84,10 +86,10 @@ import rsaApi from "@/api/rsaApi";
 export default {
   data(){
     return{
-      n:'',
-      e:'',
-      d:'',
-      R:'',
+      // n:'',
+      // e:'',
+      // d:'',
+      // R:'',
       payer:'',
       payee:'',
       msg:'',
@@ -171,11 +173,18 @@ export default {
         console.log(res)
         this.tableData1=res.data
       })
+    },
+    getMessage(){
+      rsaApi.getMessage({}).then(res=>{
+        console.log(res)
+        this.tableData2=res.data
+      })
     }
   },
   mounted() {
     this.getInit()
     this.getUser()
+    this.getMessage()
     // this.Sign()
   }
 }
