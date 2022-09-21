@@ -39,6 +39,10 @@ const test = {
 
     userPay(params){
         return request.get('/userPay',{params})
+    },
+
+    currencyVerify(params){
+        return request.get('/currencyVerify',{params})
     }
 }
 

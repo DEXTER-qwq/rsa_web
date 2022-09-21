@@ -24,7 +24,7 @@
       <el-input v-model="sigmaInput"  placeholder="请输入内容"></el-input>
       <div>m</div>
       <el-input v-model="msgInput" placeholder="请输入内容"></el-input>
-      <el-button type="primary" style="margin-left: 10px" @click="verity">确认收款</el-button>
+      <el-button type="primary" style="margin-left: 10px" @click="currencyVerify">确认收款</el-button>
     </div>
     <h1>state :{{state}}</h1>
 
@@ -181,6 +181,18 @@ export default {
       }).then(res=>{
         console.log(res)
         this.tableData2=res.data
+        this.getUser()
+      })
+    },
+    currencyVerify(){
+      rsaApi.currencyVerify({
+        payee:this.payee,
+        sigmaInput:this.sigmaInput,
+        msgInput:this.msgInput
+      }).then(res=>{
+        console.log(res)
+        this.state=res.data
+        this.getUser()
       })
     }
   },

@@ -79,6 +79,7 @@ export default {
         value:this.value
       }).then(res=>{
         console.log(res)
+        this.showCurrency()
         alert('添加成功')
       })
     },
@@ -88,6 +89,7 @@ export default {
         value:this.value
       }).then(res=>{
         console.log(res)
+        this.showCurrency()
         alert('删除成功')
       })
     },
