@@ -35,6 +35,10 @@ const test = {
 
     delCurrency(params){
         return request.get('/delCurrency',{params})
+    },
+
+    userPay(params){
+        return request.get('/userPay',{params})
     }
 }
 

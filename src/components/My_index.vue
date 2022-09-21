@@ -9,7 +9,7 @@
       <el-input v-model="msg" placeholder="请输入内容"></el-input>
       <div>money</div>
       <el-input v-model="money" placeholder="请输入付款金额"></el-input>
-      <el-button type="primary" style="margin-left: 10px" @click="payData">付款请求</el-button>
+      <el-button type="primary" style="margin-left: 10px" @click="userPay">付款请求</el-button>
     </div>
 <!--    <h1>盲化后数据 M=<span style=""> {{ get10(M) }}</span>, 随机取的R={{get10(R)}}</h1>-->
 <!--    <h1>银行盲签名后 σ'={{get10(sigma1)}}</h1>-->
@@ -101,17 +101,10 @@ export default {
       msgInput:'',
       state:'',
       input:'',
-      list:[1,2,3],
-      user:'userA',
+      // list:[1,2,3],
+      // user:'userA',
       tableData1: [],
-      tableData2: [
-        {
-          msg: '2016-05-02',
-          sigma: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          msg: '2016-05-02',
-          sigma: '上海市普陀区金沙江路 1518 弄'
-        }],
+      tableData2: [],
     }
   },
   computed: {
@@ -179,12 +172,22 @@ export default {
         console.log(res)
         this.tableData2=res.data
       })
+    },
+    userPay(){
+      rsaApi.userPay({
+        payer:this.payer,
+        msg:this.msg,
+        money:this.money
+      }).then(res=>{
+        console.log(res)
+        this.tableData2=res.data
+      })
     }
   },
   mounted() {
-    this.getInit()
+    // this.getInit()
     this.getUser()
-    this.getMessage()
+    // this.getMessage()
     // this.Sign()
   }
 }
