@@ -1,28 +1,28 @@
 import request from './request'
 
 const test = {
-    getData(){
-      return request.get('init')
-    },
+    // getData(){
+    //   return request.get('init')
+    // },
 
-    getBlindData(params) {
-        return request.get('/blind', {params})
-    },
+    // getBlindData(params) {
+    //     return request.get('/blind', {params})
+    // },
 
-    getVerity(params){
-        return request.get('/double',{params})
-    },
+    // getVerity(params){
+    //     return request.get('/double',{params})
+    // },
 
-    payData(params){
-        return request.get('/pay',{params})
-    },
+    // payData(params){
+    //     return request.get('/pay',{params})
+    // },
+
+    // getMessage(params){
+    //     return request.get('/getMessage',{params})
+    // },
 
     getUser(params){
         return request.get('/getUser',{params})
-    },
-
-    getMessage(params){
-        return request.get('/getMessage',{params})
     },
 
     newCurrency(params){

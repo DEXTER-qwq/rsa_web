@@ -116,63 +116,60 @@ export default {
       else
         return str.slice(0,10)
     },
-    getInit(){
-      rsaApi.getData().then(
-          res=>{
-            console.log(res)
-            this.n=res.data[0]
-            this.e=res.data[1]
-            this.d=res.data[2]
-          }
-      )
-    },
-    handleClick(){
-      rsaApi.getBlindData({
-        msg:this.msg
-      }).then(res => {
-        console.log(res)
-        // console.log(this.n)
-        this.M=res.data[0]
-        this.sigma1=res.data[1]
-        this.sigma=res.data[2]
-        this.sigmaInput=this.sigma
-        this.msgInput=this.msg
-      })
-    },
-    verity(){
-      rsaApi.getVerity(
-          {
-            sigma: this.sigmaInput,
-            msg: this.msgInput
-          }
-      ).then(res => {
-        console.log(res)
-        this.state = res.data
-      })
-    },
-    onChange(item){
-      alert(item)
-    },
-    payData() {
-      rsaApi.payData({
-        payer:this.payer,
-        payee:this.payee,
-        msg:this.msg,
-        money:this.money
-      })
-    },
+    // getInit(){
+    //   rsaApi.getData().then(
+    //       res=>{
+    //         console.log(res)
+    //         this.n=res.data[0]
+    //         this.e=res.data[1]
+    //         this.d=res.data[2]
+    //       }
+    //   )
+    // },
+    // handleClick(){
+    //   rsaApi.getBlindData({
+    //     msg:this.msg
+    //   }).then(res => {
+    //     console.log(res)
+    //     // console.log(this.n)
+    //     this.M=res.data[0]
+    //     this.sigma1=res.data[1]
+    //     this.sigma=res.data[2]
+    //     this.sigmaInput=this.sigma
+    //     this.msgInput=this.msg
+    //   })
+    // },
+    // verity(){
+    //   rsaApi.getVerity(
+    //       {
+    //         sigma: this.sigmaInput,
+    //         msg: this.msgInput
+    //       }
+    //   ).then(res => {
+    //     console.log(res)
+    //     this.state = res.data
+    //   })
+    // },
+    // payData() {
+    //   rsaApi.payData({
+    //     payer:this.payer,
+    //     payee:this.payee,
+    //     msg:this.msg,
+    //     money:this.money
+    //   })
+    // },
     getUser() {
       rsaApi.getUser({}).then(res=>{
         console.log(res)
         this.tableData1=res.data
       })
     },
-    getMessage(){
-      rsaApi.getMessage({}).then(res=>{
-        console.log(res)
-        this.tableData2=res.data
-      })
-    },
+    // getMessage(){
+    //   rsaApi.getMessage({}).then(res=>{
+    //     console.log(res)
+    //     this.tableData2=res.data
+    //   })
+    // },
     userPay(){
       rsaApi.userPay({
         payer:this.payer,
